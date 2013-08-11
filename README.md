@@ -13,12 +13,12 @@ You can run the module as stand alone (as root) where the LEDs are controlled in
 
 Or import this module in your own project and use the user leds for status updates, debugging or user interaction. Here is an example
 
-``
+```
 import beaglebone_userled.pythonled as pythonled
 
 user0 = pythonled(0)
 user0.ledON()
-``
+```
 
 Make sure the package is in the python searchpath and you run the script as root.
 
