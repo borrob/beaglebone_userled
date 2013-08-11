@@ -7,7 +7,7 @@ class pythonled(object):
             self.lednumber = led
             #print 'Lednummer: %d' %(self.lednumber)
         else:
-            print 'This lednumber is not supported. Use 0, 1, 2 of three'
+            print 'This lednumber is not supported. Use 0, 1, 2 or 3'
 
     def ledON(self):
         '''Switch the LED on
