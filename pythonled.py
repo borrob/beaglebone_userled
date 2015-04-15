@@ -1,11 +1,20 @@
 import os
 
 class pythonled(object):
+    """ class: pythonled
+    
+    Controls the LEDs on the beaglebone black.
+    """
 
     def __init__(self,led):
+        """init procedure
+        
+        initialise with the lednumber (0 to 3) on the beaglebone black
+
+        :param led: lednumber
+        """
         if (led >= 0 and led <=3):
             self.lednumber = led
-            #print 'Lednummer: %d' %(self.lednumber)
         else:
             print 'This lednumber is not supported. Use 0, 1, 2 or 3'
             raise ValueError('Unsupported led numner.')
@@ -14,39 +23,37 @@ class pythonled(object):
         '''Switch the LED on
         by setting the trigger to 'none' and the brightness to 'high'. You need to set the trigger
         to 'none' first or else it would just brighten the LED and not make it static on''' 
-       
         os.system('echo none > /sys/class/leds/beaglebone\:green\:usr%i/trigger' %(self.lednumber))
         os.system('echo 1 > /sys/class/leds/beaglebone\:green\:usr%i/brightness' %(self.lednumber))
 
     def off(self):
-       '''Switch the LED off
-       by setting the trigger to 'none' and the brightness to 'low'. You need to set the trigger
-       to 'none' first or else it would just dimm the LED''' 
-       
-       os.system('echo none > /sys/class/leds/beaglebone\:green\:usr%i/trigger' %(self.lednumber))
-       os.system('echo 0 > /sys/class/leds/beaglebone\:green\:usr%i/brightness' %(self.lednumber))
+        '''Switch the LED off
+        by setting the trigger to 'none' and the brightness to 'low'. You need to set the trigger
+        to 'none' first or else it would just dimm the LED''' 
+        os.system('echo none > /sys/class/leds/beaglebone\:green\:usr%i/trigger' %(self.lednumber))
+        os.system('echo 0 > /sys/class/leds/beaglebone\:green\:usr%i/brightness' %(self.lednumber))
 
     def dimm(self):
         '''Set the brightness low
-           Use ledOFF to switch off the LED'''
-       
+        Use ledOFF to switch off the LED'''
         os.system('echo 0 > /sys/class/leds/beaglebone\:green\:usr%i/brightness' %(self.lednumber))
 
     def bright(self):
         '''Set the brightness high
-           Use ledON to switch on the LED'''
-       
+        Use ledON to switch on the LED'''
         os.system('echo 1 > /sys/class/leds/beaglebone\:green\:usr%i/brightness' %(self.lednumber))
 
     def heartbeat(self):
-        '''Set the brightness high and pulse the LED with a hearbeat
-           '''
-       
+        '''Set the brightness high and pulse the LED with a heartbeat
+        '''
         os.system('echo 1 > /sys/class/leds/beaglebone\:green\:usr%i/brightness' %(self.lednumber))
         os.system('echo heartbeat > /sys/class/leds/beaglebone\:green\:usr%i/trigger' %(self.lednumber))
 
     def times(self,on,off):
         '''Set the brightness high and pulse the LED with ON time and OFF time (ms).
+
+        :param on: on time (ms)
+        :param off: of time (ms)
         '''
         os.system('echo 1 > /sys/class/leds/beaglebone\:green\:usr%i/brightness' %(self.lednumber))
         os.system('echo timer > /sys/class/leds/beaglebone\:green\:usr%i/trigger' %(self.lednumber))
@@ -68,6 +75,8 @@ class pythonled(object):
         os.system('echo 1 > /sys/class/leds/beaglebone\:green\:usr%i/activate' %(self.lednumber))
 
 def mainfunction():
+    """A mainfunction as an example
+    """
     user0 = pythonled(0)
     user0.on()
     user1 = pythonled(1)
